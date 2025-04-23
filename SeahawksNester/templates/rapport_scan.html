@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport de scan - Seahawks Nester</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <h1 class="text-primary">Rapport de scan - {{ rapport.hostname }}</h1>
+
+    {% if rapport.devices and rapport.devices|length > 0 %}
+        <h3>Équipements détectés :</h3>
+        <ul>
+            {% for device in rapport.devices %}
+                <li>{{ device.host }} - État : {{ device.state }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">Aucun rapport disponible pour cette sonde.</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary mt-3">Retour</a>
+</div>
+</body>
+</html>

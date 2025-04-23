@@ -1,0 +1,49 @@
+[
+    {
+        "id": 1,
+        "name": "Sonde J14",
+        "status": "connectée",
+        "ip_address": "172.20.10.2",
+        "dashboard_info": {
+            "ip_locale": "172.20.10.2",
+            "hostname": "J14",
+            "devices_count": 2,
+            "latence_wan": "39ms",
+            "version_app": "1.0.0",
+            "devices": []
+        },
+        "last_scan": "2025-04-23T00:10:02.517535"
+    },
+    {
+        "id": 2,
+        "name": "Sonde J14",
+        "status": "connectée",
+        "ip_address": "192.168.1.129",
+        "dashboard_info": {
+            "ip_locale": "192.168.1.129",
+            "hostname": "J14",
+            "devices_count": 4,
+            "latence_wan": "4ms",
+            "version_app": "1.0.0",
+            "devices": [
+                {
+                    "host": "192.168.1.186",
+                    "state": "up"
+                },
+                {
+                    "host": "192.168.1.254",
+                    "state": "up"
+                },
+                {
+                    "host": "192.168.1.1",
+                    "state": "up"
+                },
+                {
+                    "host": "192.168.1.129",
+                    "state": "up"
+                }
+            ]
+        },
+        "last_scan": "2025-04-23T01:07:29.186310"
+    }
+]

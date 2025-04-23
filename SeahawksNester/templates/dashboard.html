@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Seahawks Nester - Tableau de bord</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .status-dot {
+            font-weight: bold;
+        }
+        .badge-version {
+            background-color: #007bff;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        td span[title] {
+            cursor: help;
+            border-bottom: 1px dotted #aaa;
+        }
+    </style>
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold text-primary">Tableau de bord des sondes</h1>
+        <form method="get">
+            <button type="submit" class="btn btn-outline-primary">Actualiser</button>
+        </form>
+    </div>
+
+    {% if results %}
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>IP locale</th>
+            <th>Hostname</th>
+            <th>État</th>
+            <th>Équipements</th>
+            <th>Latence WAN</th>
+            <th>Version</th>
+            <th>Dernier Scan</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td><a href="{{ url_for('rapport_scan', sonde_id=result.id) }}">{{ result.name }}</a></td>
+                <td>{{ result.dashboard_info.ip_locale }}</td>
+                <td>{{ result.dashboard_info.hostname or "-" }}</td>
+
+                <!-- Pastille de statut -->
+                <td>
+                    {% if result.status == "connectée" %}
+                        <span class="status-dot" style="color: green;">● Connectée</span>
+                    {% elif result.status == "déconnectée" %}
+                        <span class="status-dot" style="color: red;">● Déconnectée</span>
+                    {% else %}
+                        <span class="status-dot" style="color: gray;">● Inconnue</span>
+                    {% endif %}
+                </td>
+
+                <td>{{ result.dashboard_info.devices_count or "-" }}</td>
+                <td>{{ result.dashboard_info.latence_wan or "-" }}</td>
+
+                <!-- Badge version -->
+                <td>
+              <span class="badge-version" style="font-family: monospace;">v{{ result.dashboard_info.version_app or "-" }}</span>
+                </td>
+
+                <!-- Infobulle date scan -->
+                <td>
+                    {% if result.last_scan %}
+                        <span title="{{ result.last_scan }}">{{ result.last_scan[:10] }}</span>
+                    {% else %}
+                        <em style="color: gray;">Non renseigné</em>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div class="alert alert-warning">Aucune sonde à afficher pour le moment.</div>
+    {% endif %}
+</div>
+</body>
+</html>
