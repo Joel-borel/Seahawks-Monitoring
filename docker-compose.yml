@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+
+  nester_api:
+    image: python:3.10-slim
+    working_dir: /app
+    command: bash -c "pip install -r requirements.txt && uvicorn api:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - ./SeahawksNester/nesterApi:/app
+      - ./SeahawksNester/requirements.txt:/app/requirements.txt
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  nester_app:
+    image: python:3.10-slim
+    working_dir: /app
+    command: bash -c "pip install -r requirements.txt && python app.py"
+    volumes:
+      - ./SeahawksNester:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - nester_api
+    restart: unless-stopped

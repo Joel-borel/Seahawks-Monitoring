@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Sonde 25061b068384",
+        "status": "connectée",
+        "ip_address": "172.18.0.3",
+        "dashboard_info": {
+            "ip_locale": "172.18.0.3",
+            "hostname": "25061b068384",
+            "devices_count": 3,
+            "latence_wan": "injoignable",
+            "version_app": "1.0.0"
+        },
+        "last_scan": "2025-04-20T12:22:39.834008"
+    }
+]
